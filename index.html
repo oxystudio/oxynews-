@@ -3,7 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Brief News — powered by OXYstudio</title>
+  <title>Brief News</title>
+  <meta name="application-name" content="Brief News" />
+  <meta name="apple-mobile-web-app-title" content="Brief News" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#050507" />
+
+  <!-- ВЕКТОРНАЯ ИКОНКА BRIEF NEWS (ОРБИТА + ЗВЕЗДА + BRIEF NEWS) ВМЕСТО БУКВЫ B / O -->
+  <link
+    id="faviconSvgLink"
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='56' fill='%23050507'/%3E%3Crect x='6' y='6' width='244' height='244' rx='50' fill='none' stroke='%231e2230' stroke-width='4'/%3E%3Cpath d='M 98 76 C 142 58, 194 54, 220 62' fill='none' stroke='%23ffffff' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M 240 84 C 244 106, 224 134, 194 154' fill='none' stroke='%23ffffff' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M 46 116 C 8 144, 2 192, 54 196 C 82 198, 112 190, 130 182 C 104 188, 70 190, 48 185 C 18 178, 20 144, 48 120 Z' fill='%23ffffff'/%3E%3Cpath d='M 231 50 C 234 62, 238 66, 250 69 C 238 72, 234 76, 231 88 C 228 76, 224 72, 212 69 C 224 66, 228 62, 231 50 Z' fill='%23ffffff'/%3E%3Ctext x='48' y='128' fill='%23ffffff' font-family='system-ui,-apple-system,sans-serif' font-weight='800' font-size='54' letter-spacing='-2'%3EBrief%3C/text%3E%3Ctext x='50' y='178' fill='%23ffffff' font-family='system-ui,-apple-system,sans-serif' font-weight='800' font-size='54' letter-spacing='-2'%3ENews%3C/text%3E%3C/svg%3E"
+  />
+  <link id="faviconPngLink" rel="icon" type="image/png" sizes="64x64" href="" />
+  <link id="shortcutIconLink" rel="shortcut icon" type="image/png" href="" />
+  <link id="appleTouchIconLink" rel="apple-touch-icon" sizes="180x180" href="" />
+  <link id="webManifestLink" rel="manifest" href="" />
+
+  <!-- МГНОВЕННАЯ ГЕНЕРАЦИЯ PNG-ИКОНОК BRIEF NEWS (180x180 и 64x64) ДЛЯ iOS / SAFARI / CHROME -->
+  <script>
+    (function generateBriefNewsAppIcons() {
+      try {
+        function renderLogoPng(size) {
+          const canvas = document.createElement("canvas");
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext("2d");
+          const s = size / 256;
+
+          // Тёмный скругленный фон #050507
+          const r = 54 * s;
+          ctx.fillStyle = "#050507";
+          ctx.beginPath();
+          ctx.moveTo(r, 0);
+          ctx.lineTo(size - r, 0);
+          ctx.quadraticCurveTo(size, 0, size, r);
+          ctx.lineTo(size, size - r);
+          ctx.quadraticCurveTo(size, size, size - r, size);
+          ctx.lineTo(r, size);
+          ctx.quadraticCurveTo(0, size, 0, size - r);
+          ctx.lineTo(0, r);
+          ctx.quadraticCurveTo(0, 0, r, 0);
+          ctx.closePath();
+          ctx.fill();
+
+          // Тонкая внутренняя рамка
+          ctx.strokeStyle = "#1f2433";
+          ctx.lineWidth = Math.max(2, 4 * s);
+          ctx.stroke();
+
+          ctx.save();
+          ctx.scale(s, s);
+
+          // Верхняя дуга орбиты
+          ctx.strokeStyle = "#ffffff";
+          ctx.lineWidth = 7.2;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(96, 76);
+          ctx.bezierCurveTo(140, 58, 192, 54, 218, 62);
+          ctx.stroke();
+
+          // Правая дуга орбиты
+          ctx.beginPath();
+          ctx.moveTo(238, 84);
+          ctx.bezierCurveTo(242, 108, 222, 136, 192, 154);
+          ctx.stroke();
+
+          // Левая нижняя серповидная дуга орбиты с утолщением
+          ctx.fillStyle = "#ffffff";
+          ctx.beginPath();
+          ctx.moveTo(46, 114);
+          ctx.bezierCurveTo(8, 144, 4, 194, 56, 198);
+          ctx.bezierCurveTo(84, 200, 114, 192, 132, 184);
+          ctx.bezierCurveTo(106, 189, 72, 191, 50, 186);
+          ctx.bezierCurveTo(18, 178, 20, 144, 49, 118);
+          ctx.closePath();
+          ctx.fill();
+
+          // Четырёхконечная звезда в правом верхнем углу
+          ctx.beginPath();
+          ctx.moveTo(230, 48);
+          ctx.quadraticCurveTo(233, 64, 249, 68);
+          ctx.quadraticCurveTo(233, 72, 230, 88);
+          ctx.quadraticCurveTo(227, 72, 211, 68);
+          ctx.quadraticCurveTo(227, 64, 230, 48);
+          ctx.closePath();
+          ctx.fill();
+
+          // Текст Brief / News
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "800 54px -apple-system, BlinkMacSystemFont, 'Inter', sans-serif";
+          ctx.textBaseline = "alphabetic";
+          ctx.fillText("Brief", 46, 128);
+          ctx.fillText("News", 48, 178);
+
+          ctx.restore();
+          return canvas.toDataURL("image/png");
+        }
+
+        const icon64 = renderLogoPng(64);
+        const icon180 = renderLogoPng(180);
+
+        const pngEl = document.getElementById("faviconPngLink");
+        const shortEl = document.getElementById("shortcutIconLink");
+        const appleEl = document.getElementById("appleTouchIconLink");
+        if (pngEl) pngEl.href = icon64;
+        if (shortEl) shortEl.href = icon64;
+        if (appleEl) appleEl.href = icon180;
+
+        const manifestObj = {
+          name: "Brief News",
+          short_name: "Brief News",
+          display: "standalone",
+          background_color: "#050507",
+          theme_color: "#050507",
+          icons: [
+            { src: icon64, sizes: "64x64", type: "image/png" },
+            { src: icon180, sizes: "180x180", type: "image/png" }
+          ]
+        };
+        const manifestEl = document.getElementById("webManifestLink");
+        if (manifestEl) {
+          manifestEl.href = "data:application/manifest+json;charset=utf-8," + encodeURIComponent(JSON.stringify(manifestObj));
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +140,7 @@
 
   <style>
     :root {
-      --bg: #000000;
+      --bg: #050507;
       --card: #0b0b0d;
       --card-inner: #060608;
       --border: #1e1e22;
@@ -33,7 +162,7 @@
       max-width: 100vw;
       overflow-x: hidden;
       overscroll-behavior-x: none;
-      background: #000000;
+      background: #050507;
       color: #f4f4f6;
       margin: 0;
       padding: 0;
@@ -46,7 +175,7 @@
       width: 100%;
       max-width: 640px;
       margin: 0 auto;
-      padding: max(72px, calc(env(safe-area-inset-top, 24px) + 48px)) 14px 84px 14px;
+      padding: max(60px, calc(env(safe-area-inset-top, 20px) + 38px)) 12px 84px 12px;
       box-sizing: border-box;
       overflow-x: hidden;
     }
@@ -57,8 +186,9 @@
       justify-content: space-between;
       width: 100%;
       max-width: 100%;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: nowrap;
+      min-width: 0;
     }
 
     .brand-logo-btn {
@@ -69,6 +199,7 @@
       padding: 0;
       cursor: pointer;
       flex-shrink: 0;
+      min-width: 0;
       transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
@@ -77,8 +208,8 @@
     }
 
     .brand-logo-svg {
-      height: 46px;
-      width: auto;
+      width: 98px;
+      height: 38px;
       display: block;
       overflow: visible;
     }
@@ -87,27 +218,28 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 5px;
+      gap: 4px;
       flex-shrink: 0;
       min-width: 0;
+      max-width: 100%;
     }
 
     .oxygen-badge {
-      height: 32px;
-      padding: 0 8px;
+      height: 30px;
+      padding: 0 7px;
       border-radius: 9999px;
       background-color: #050814;
       border: 1px solid #1e2946;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       white-space: nowrap;
       flex-shrink: 0;
     }
 
     .oxygen-badge-text {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.04em;
       color: #ffffff;
@@ -115,7 +247,7 @@
     }
 
     .icon-circle-btn {
-      height: 32px;
+      height: 30px;
       border-radius: 9999px;
       background-color: #0b0b0d;
       border: 1px solid #1e1e22;
@@ -123,7 +255,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.16s ease;
@@ -143,45 +275,47 @@
     }
 
     #headerGlobalRuBtn {
-      width: 32px;
+      width: 30px;
       padding: 0;
     }
 
     #refreshBtn {
-      padding: 0 10px;
-      gap: 4px;
-      font-size: 11.5px;
+      padding: 0 9px;
+      gap: 3.5px;
+      font-size: 11px;
       font-weight: 600;
       border: 1px solid rgba(79, 123, 255, 0.45);
       background-color: #0b1020;
       color: #dde7ff;
     }
 
-    @media (max-width: 375px) {
-      .brand-logo-svg { height: 40px; }
-      .header-actions { gap: 4px; }
-      .oxygen-badge { padding: 0 6px; height: 29px; }
+    @media (max-width: 380px) {
+      .brand-logo-svg { width: 88px; height: 34px; }
+      .header-actions { gap: 3.5px; }
+      .oxygen-badge { padding: 0 5.5px; height: 28px; }
       .oxygen-badge-text { font-size: 10px; }
-      #headerGlobalRuBtn { width: 29px; height: 29px; font-size: 10.5px; }
-      #refreshBtn { height: 29px; padding: 0 8px; font-size: 10.5px; }
+      #headerGlobalRuBtn { width: 28px; height: 28px; font-size: 10px; }
+      #refreshBtn { height: 28px; padding: 0 7px; font-size: 10px; }
     }
 
     .pills-wrapper {
       width: 100%;
       max-width: 100%;
+      min-width: 0;
       overflow: hidden;
     }
 
     .pills-scroll {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       overflow-x: auto;
       overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       padding-bottom: 2px;
       width: 100%;
+      max-width: 100%;
     }
 
     .pills-scroll::-webkit-scrollbar {
@@ -194,8 +328,8 @@
       color: #e5e5ea;
       border: 1px solid #1e1e22;
       border-radius: 9999px;
-      padding: 7px 14px;
-      font-size: 13px;
+      padding: 6.5px 13px;
+      font-size: 12.5px;
       font-weight: 500;
       line-height: 1.2;
       cursor: pointer;
@@ -219,10 +353,13 @@
       background-color: #0b0b0d;
       border: 1px solid #1e1e22;
       border-radius: 18px;
-      padding: 18px;
+      padding: 15px;
       width: 100%;
       max-width: 100%;
+      min-width: 0;
       overflow: hidden;
+      word-break: break-word;
+      overflow-wrap: anywhere;
       transition: border-color 0.18s ease;
     }
 
@@ -381,6 +518,17 @@
         >News</text>
       </g>
 
+      <!-- КОМПАКТНАЯ ИКОНКА-БЕЙДЖ BRIEF NEWS (ДЛЯ СТАТУСНОЙ СТРОКИ И ТАБОВ) -->
+      <g id="brief-news-mini-badge">
+        <rect x="0" y="0" width="64" height="64" rx="15" fill="#0b0d14" stroke="#252c40" stroke-width="2.5" />
+        <path d="M 22 19 C 34 14, 47 13, 54 15" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" />
+        <path d="M 59 21 C 60 28, 55 36, 47 41" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" />
+        <path d="M 12 30 C 2 38, 1 50, 14 51 C 22 52, 30 49, 35 47 C 28 48, 19 49, 13 47 C 5 45, 5 37, 13 31 Z" fill="#ffffff" />
+        <path d="M 57 12 C 58 15.5, 59 16.5, 62.5 17.5 C 59 18.5, 58 19.5, 57 23 C 56 19.5, 55 18.5, 51.5 17.5 C 55 16.5, 56 15.5, 57 12 Z" fill="#ffffff" />
+        <text x="12" y="33" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="14" letter-spacing="-0.6">Brief</text>
+        <text x="12.5" y="46" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="14" letter-spacing="-0.6">News</text>
+      </g>
+
       <!-- ПИКСЕЛЬНАЯ СИНЯЯ ПЛАНЕТА OXY.GEN -->
       <g id="oxygen-pixel-planet-icon" shape-rendering="crispEdges">
         <rect x="64" y="2" width="4" height="4" fill="#c7d9ff" />
@@ -456,8 +604,13 @@
         </div>
       </div>
 
-      <div class="mt-2 text-[12px] text-[#8e8e93] leading-snug flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
-        <span>Интеллектуальная лента новостей</span>
+      <div class="mt-2 text-[11.5px] text-[#8e8e93] leading-snug flex flex-wrap items-center gap-x-1.5 gap-y-1 min-w-0">
+        <span class="inline-flex items-center gap-1.5 text-[#d1d1d6] font-medium">
+          <svg viewBox="0 0 64 64" class="w-[16px] h-[16px] shrink-0 rounded-[4px]" aria-hidden="true">
+            <use href="#brief-news-mini-badge"></use>
+          </svg>
+          <span>Brief News</span>
+        </span>
         <span>·</span>
         <span id="statusTimestamp">обновлено только что</span>
         <span>·</span>
@@ -519,18 +672,18 @@
 
     <!-- КАРТОЧКА СВОДКИ OXY.GEN -->
     <section id="oxygenBriefCard" class="oxy-card mt-3.5">
-      <div class="flex items-center justify-between gap-2">
-        <div class="flex items-center gap-2">
-          <svg viewBox="0 0 300 74" class="h-[20px] w-auto overflow-visible" aria-label="OXY.GEN">
+      <div class="flex flex-wrap items-center justify-between gap-2 min-w-0">
+        <div class="flex items-center gap-1.5 min-w-0">
+          <svg viewBox="0 0 300 74" class="h-[18px] w-auto shrink-0 overflow-visible" aria-label="OXY.GEN">
             <use href="#oxygen-full-logo"></use>
           </svg>
-          <span class="text-[11px] uppercase tracking-wider text-[#8e8e93] font-medium">· Сводка выпуска</span>
+          <span class="text-[10.5px] uppercase tracking-wider text-[#8e8e93] font-medium truncate">· Сводка выпуска</span>
         </div>
-        <button type="button" id="briefLangBtn" class="card-btn text-[11px] py-1 px-2.5">
+        <button type="button" id="briefLangBtn" class="card-btn text-[11px] py-1 px-2.5 shrink-0">
           RU На русском
         </button>
       </div>
-      <p id="oxygenBriefText" class="mt-2 text-[13.5px] leading-relaxed text-[#d1d1d6]"></p>
+      <p id="oxygenBriefText" class="mt-2 text-[13px] leading-relaxed text-[#d1d1d6]"></p>
     </section>
 
     <!-- СТРОКА СТАТУСА РАЗДЕЛА -->
